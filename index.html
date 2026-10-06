@@ -279,6 +279,46 @@
       .field-row.three-columns { grid-template-columns: 1fr; }
       h1 { font-size: 3.4rem; }
     }
+
+    :root {
+      --ink: #102a43;
+      --muted: #576574;
+      --paper: #f4f8fb;
+      --panel: #ffffff;
+      --line: rgba(16, 42, 67, 0.18);
+      --accent: #f5a623;
+      --accent-dark: #d88d0d;
+      --shadow: 0 24px 70px rgba(16, 42, 67, 0.16);
+    }
+
+    body { background: linear-gradient(180deg, #f4f8fb 0%, #edf7f2 100%); }
+    .form-shell { border-color: rgba(16, 42, 67, 0.1); }
+    .intro { color: #ffffff; background: #102a43; }
+    .intro::before {
+      background:
+        linear-gradient(180deg, rgba(16, 42, 67, 0.3), rgba(16, 42, 67, 0.9)),
+        url('https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1000&q=85') center / cover;
+    }
+    .brand-lockup, .eyebrow { color: #ffd77a; }
+    .brand-lockup span { color: #ffffff; }
+    .intro-copy { color: #e0e8ef; }
+    input, select {
+      border-radius: 10px;
+      background: #ffffff;
+    }
+    input:focus, select:focus { box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.18); }
+    .submit-button {
+      border-radius: 10px;
+      color: #102a43;
+    }
+    .submit-button:focus-visible,
+    .success-dialog-actions a:focus-visible {
+      outline-color: rgba(245, 166, 35, 0.32);
+    }
+    .success-dialog-actions button,
+    .success-dialog-actions a { border-radius: 10px; }
+    .success-dialog-actions a { color: #102a43; }
+    .login-link a { color: #244a73; }
   </style>
 </head>
 <body>
