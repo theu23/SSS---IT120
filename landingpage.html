@@ -104,8 +104,11 @@
       }
 
       .nav-cta {
+        border: 0;
         background: var(--primary);
         color: var(--dark);
+        cursor: pointer;
+        font: inherit;
         font-weight: 700;
         padding: 12px 22px;
         border-radius: 999px;
@@ -477,9 +480,10 @@
           <a href="#solutions">Solutions</a>
           <a href="#about">Why Us</a>
           <a href="#contact">Contact</a>
+          <a href="#contact">Free Consultation</a>
         </nav>
 
-        <a href="#contact" class="nav-cta">Free Consultation</a>
+        <button type="button" class="nav-cta" id="logoutButton">Log out</button>
       </div>
     </header>
 
@@ -658,6 +662,11 @@
 
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
+      document.getElementById("logoutButton").addEventListener("click", () => {
+        sessionStorage.clear();
+        window.location.assign("login.html");
+      });
     </script>
   </body>
 </html>
+
