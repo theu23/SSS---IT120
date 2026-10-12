@@ -8,6 +8,9 @@
       name="description"
       content="Sun Son Solar provides premium solar panels, storage, and full-service installation for homes and businesses."
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet" />
     <style>
       :root {
         --primary: #f5a623;
@@ -33,7 +36,7 @@
 
       body {
         margin: 0;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-family: "DM Sans", "Segoe UI", sans-serif;
         background: linear-gradient(180deg, #f4f8fb 0%, #edf7f2 100%);
         color: var(--text);
         line-height: 1.6;
@@ -141,7 +144,7 @@
 
       .nav-search input:focus {
         background: var(--white);
-        outline-color: #526bff;
+        outline-color: var(--primary-dark);
       }
 
       .nav-actions {
@@ -204,7 +207,7 @@
       .nav-button:focus-visible,
       .nav-links a:focus-visible,
       .brand:focus-visible {
-        outline: 3px solid #526bff;
+        outline: 3px solid var(--primary-dark);
         outline-offset: 3px;
       }
 
@@ -213,7 +216,7 @@
         overflow: hidden;
         background:
           linear-gradient(120deg, rgba(7, 18, 29, 0.82), rgba(10, 42, 55, 0.6)),
-          url("photo.png") center/cover no-repeat;
+          url("https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=2000&q=88") center/cover no-repeat;
       }
 
       .hero::before {
@@ -251,8 +254,9 @@
         margin: 22px 0 18px;
         font-size: clamp(2.7rem, 5vw, 5rem);
         line-height: 1.02;
-        letter-spacing: -0.06em;
+        letter-spacing: 0;
         color: var(--white);
+        font-family: "Fraunces", Georgia, serif;
       }
 
       .hero-copy {
@@ -318,7 +322,9 @@
         margin: 0 0 12px;
         font-size: clamp(2rem, 4vw, 3rem);
         color: var(--secondary);
-        letter-spacing: -0.05em;
+        letter-spacing: 0;
+        line-height: 1.12;
+        font-family: "Fraunces", Georgia, serif;
       }
 
       .section-header p {
@@ -327,17 +333,64 @@
         font-size: 1.04rem;
       }
 
+      .benefit-strip {
+        background: var(--white);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .benefit-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .benefit-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        min-height: 112px;
+        padding: 20px 28px;
+        border-right: 1px solid var(--border);
+      }
+
+      .benefit-item:last-child { border-right: 0; }
+
+      .benefit-icon {
+        width: 42px;
+        height: 42px;
+        flex: 0 0 42px;
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        background: rgba(245, 166, 35, 0.18);
+        color: #8b5700;
+        font-size: 1.25rem;
+        font-weight: 700;
+      }
+
+      .benefit-item strong {
+        display: block;
+        color: var(--secondary);
+        font-size: 0.98rem;
+      }
+
+      .benefit-item span:last-child {
+        display: block;
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.4;
+      }
+
       .product-grid {
         display: grid;
-        grid-template-columns: repeat(4, minmax(220px, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 22px;
       }
 
       .product-card {
         background: var(--white);
         border: 1px solid var(--border);
-        border-radius: 22px;
-        padding: 16px 16px 20px;
+        border-radius: 12px;
+        padding: 12px 12px 18px;
         box-shadow: 0 10px 24px rgba(15, 22, 33, 0.04);
         transition: transform 0.2s ease, box-shadow 0.2s ease;
       }
@@ -351,7 +404,7 @@
         width: 100%;
         height: 180px;
         object-fit: cover;
-        border-radius: 16px;
+        border-radius: 8px;
         display: block;
         margin-bottom: 18px;
       }
@@ -360,6 +413,16 @@
         margin: 0 0 8px;
         color: var(--secondary);
         font-size: 1.24rem;
+      }
+
+      .product-card h3,
+      .feature-item h3,
+      .story-card h3,
+      .faq-list summary,
+      .contact-box h3,
+      .cta-band h3 {
+        font-family: "Fraunces", Georgia, serif;
+        letter-spacing: 0;
       }
 
       .product-card p {
@@ -382,7 +445,7 @@
       .feature-item {
         background: rgba(255, 255, 255, 0.04);
         border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 22px;
+        border-radius: 12px;
         padding: 28px 22px;
       }
 
@@ -403,7 +466,7 @@
 
       .cta-band {
         background: linear-gradient(135deg, var(--primary), #ffd371);
-        border-radius: 28px;
+        border-radius: 12px;
         padding: 32px 34px;
         display: flex;
         align-items: center;
@@ -416,7 +479,7 @@
         margin: 0 0 8px;
         color: var(--dark);
         font-size: clamp(1.6rem, 2vw, 2.3rem);
-        letter-spacing: -0.04em;
+        line-height: 1.12;
       }
 
       .cta-band p {
@@ -439,7 +502,7 @@
       .contact-box {
         background: var(--white);
         border: 1px solid var(--border);
-        border-radius: 28px;
+        border-radius: 12px;
         padding: 30px;
       }
 
@@ -447,7 +510,7 @@
         margin: 0 0 18px;
         color: var(--secondary);
         font-size: 2rem;
-        letter-spacing: -0.05em;
+        line-height: 1.15;
       }
 
       .contact-list {
@@ -476,7 +539,7 @@
       .contact-card {
         background: linear-gradient(180deg, #11314f, #1f4668);
         color: var(--white);
-        border-radius: 28px;
+        border-radius: 12px;
         padding: 30px 26px;
         box-shadow: 0 24px 45px rgba(17, 49, 79, 0.22);
       }
@@ -498,10 +561,149 @@
         font-weight: 700;
       }
 
+      .stories {
+        background: rgba(255, 255, 255, 0.68);
+      }
+
+      .story-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .story-card {
+        padding: 24px;
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-top: 3px solid var(--primary);
+        border-radius: 10px;
+      }
+
+      .story-label {
+        display: inline-block;
+        margin-bottom: 12px;
+        color: #8b5700;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .story-card blockquote {
+        margin: 0 0 18px;
+        color: var(--secondary);
+        font-size: 1.04rem;
+        line-height: 1.55;
+      }
+
+      .story-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .faq-list {
+        max-width: 820px;
+        margin: 0 auto;
+        border-top: 1px solid var(--border);
+      }
+
+      .faq-list details {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .faq-list summary {
+        position: relative;
+        padding: 20px 44px 20px 4px;
+        color: var(--secondary);
+        cursor: pointer;
+        font-size: 1.12rem;
+        font-weight: 600;
+        list-style: none;
+      }
+
+      .faq-list summary::-webkit-details-marker { display: none; }
+
+      .faq-list summary::after {
+        content: "+";
+        position: absolute;
+        right: 6px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--primary-dark);
+        font: 500 1.5rem/1 "DM Sans", sans-serif;
+      }
+
+      .faq-list details[open] summary::after { content: "−"; }
+
+      .faq-list details p {
+        max-width: 72ch;
+        margin: -4px 0 20px 4px;
+        color: var(--muted);
+      }
+
+      .faq-list summary:focus-visible,
+      .faq-list a:focus-visible,
+      footer a:focus-visible {
+        outline: 3px solid var(--primary-dark);
+        outline-offset: 3px;
+      }
+
       footer {
         background: #091823;
         color: rgba(255, 255, 255, 0.72);
-        padding: 26px 0 30px;
+        padding: 48px 0 24px;
+      }
+
+      .footer-main {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr 1fr;
+        gap: 42px;
+        padding-bottom: 34px;
+      }
+
+      .footer-brand strong,
+      .footer-column h2 {
+        display: block;
+        margin: 0 0 12px;
+        color: var(--white);
+        font-size: 1rem;
+      }
+
+      .footer-brand p {
+        max-width: 38ch;
+        margin: 0;
+        font-size: 0.92rem;
+      }
+
+      .footer-column h2 { font-family: inherit; }
+
+      .footer-links {
+        display: grid;
+        justify-items: start;
+        gap: 8px;
+      }
+
+      .footer-links a,
+      .footer-legal a {
+        color: rgba(255, 255, 255, 0.78);
+        text-decoration: underline;
+        text-decoration-color: rgba(255, 255, 255, 0.28);
+        text-underline-offset: 3px;
+      }
+
+      .footer-links a:hover,
+      .footer-legal a:hover { color: #ffd77a; }
+
+      .footer-legal {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px 24px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.14);
+        font-size: 0.84rem;
       }
 
       .footer-wrap {
@@ -514,22 +716,21 @@
 
       @media (max-width: 980px) {
         .nav {
-          gap: 14px;
+          gap: 8px;
         }
 
         .nav-links {
-          gap: 14px;
-        }
-
-        .nav-links .business-link {
-          display: none;
+          gap: 8px;
         }
 
         .contact-wrap,
         .product-grid,
-        .feature-grid {
+        .feature-grid,
+        .story-grid {
           grid-template-columns: 1fr 1fr;
         }
+
+        .benefit-item { padding: 18px 14px; }
 
         .hero-inner {
           min-height: 480px;
@@ -576,16 +777,22 @@
           padding: 0 14px;
         }
 
-        .nav-links .business-link {
-          display: inline;
-        }
-
         .product-grid,
         .feature-grid,
-        .hero-highlights,
-        .contact-wrap {
+        .story-grid,
+        .contact-wrap,
+        .benefit-grid,
+        .footer-main {
           grid-template-columns: 1fr;
         }
+
+        .benefit-item {
+          min-height: 88px;
+          border-right: 0;
+          border-bottom: 1px solid var(--border);
+        }
+
+        .benefit-item:last-child { border-bottom: 0; }
 
         .hero {
           background-position: center;
@@ -599,6 +806,10 @@
           flex-direction: column;
           text-align: center;
         }
+
+        .footer-main { gap: 26px; }
+
+        .footer-legal { align-items: flex-start; flex-direction: column; }
       }
     </style>
   </head>
@@ -611,10 +822,10 @@
         </a>
 
         <nav class="nav-links" aria-label="Main navigation">
-          <a href="#solutions">Explore</a>
+          <a href="#solutions">Services</a>
           <a href="#about">About</a>
-          <a class="business-link" href="#contact">Businesses</a>
-          <a href="index.html" id="navCreate">Create</a>
+          <a href="#faqs">FAQs</a>
+          <a href="#contact">Contact</a>
         </nav>
 
         <form class="nav-search" id="productSearch" role="search">
@@ -626,7 +837,7 @@
         </form>
 
         <div class="nav-actions">
-          <a class="nav-button nav-login" id="navLogin" href="login.html">Log in</a>
+          <a class="nav-button nav-login" id="navLogin" href="login.html">Customer login</a>
           <a class="nav-button nav-signup" id="navSignup" href="index.html">Sign up</a>
           <button class="nav-button nav-logout" id="navLogout" type="button" hidden>Log out</button>
         </div>
@@ -638,15 +849,15 @@
         <div class="container hero-inner">
           <div class="hero-copy">
             <span class="eyebrow">Clean energy for every home</span>
-            <h1>Power your future with smarter solar.</h1>
+            <h1>Power Your Future with Solar.</h1>
             <p>
-              Sun Son Solar delivers premium solar systems, battery storage, and
-              end-to-end installation support to help homeowners and businesses cut
-              energy costs and reduce their carbon footprint.
+              Sun Son Solar helps homes and businesses plan, install, and care for solar
+              systems that can lower electricity costs, support a cleaner future, and
+              give you more control over where your energy comes from.
             </p>
 
             <div class="button-row">
-              <a href="#contact" class="primary-btn">Get a Free Quote</a>
+              <a href="mailto:info@sunsonsolar.com?subject=Free%20solar%20quote" class="primary-btn">Request a Free Quote</a>
               <a href="#solutions" class="secondary-btn">Explore Solutions</a>
             </div>
 
@@ -654,88 +865,68 @@
         </div>
       </section>
 
+      <section class="benefit-strip" aria-label="Solar benefits">
+        <div class="container benefit-grid">
+          <div class="benefit-item">
+            <span class="benefit-icon" aria-hidden="true">↓</span>
+            <div><strong>Manage energy costs</strong><span>Use solar generation to reduce reliance on grid electricity.</span></div>
+          </div>
+          <div class="benefit-item">
+            <span class="benefit-icon" aria-hidden="true">✳</span>
+            <div><strong>Choose cleaner power</strong><span>Support a more sustainable energy mix with renewable generation.</span></div>
+          </div>
+          <div class="benefit-item">
+            <span class="benefit-icon" aria-hidden="true">↗</span>
+            <div><strong>Build energy independence</strong><span>Add storage for more flexibility when the sun goes down.</span></div>
+          </div>
+        </div>
+      </section>
+
       <section class="section" id="solutions">
         <div class="container">
           <div class="section-header">
-            <h2>Complete solar products and services</h2>
+            <h2>Solar services for every step</h2>
             <p>
-              From generation to installation and long-term support, we make it easy
-              to build a high-performing solar system that fits your property and goals.
+              Get practical guidance from your first questions through installation and ongoing care.
             </p>
           </div>
 
           <p id="searchStatus" role="status" aria-live="polite" hidden></p>
           <div class="product-grid" id="productGrid">
             <article class="product-card">
-              <img class="product-photo" src="photo.png" alt="Solar panels" />
+              <img class="product-photo" src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=900&q=82" alt="Solar panels catching sunlight on a rooftop" loading="lazy" />
               <h3>Solar panels</h3>
-              <p>High-efficiency modules built for long-term power production and durability.</p>
+              <p>Explore panel options and find a system sized around your property and energy needs.</p>
             </article>  
 
             <article class="product-card">
-              <img class="product-photo" src="inverters.jpg" alt="Solar inverter" />
-              <h3>Inverters</h3>
-              <p>Smart conversion systems that maximize solar output and efficiency.</p>
-            </article>
-
-            <article class="product-card">
-              <img class="product-photo" src="batteries.jpg" alt="Battery storage" />
-              <h3>Batteries</h3>
-              <p>Energy storage for backup, peak shaving, and greater energy independence.</p>
-            </article>
-
-            <article class="product-card">
-              <img class="product-photo" src="rackingmounting.png" alt="Racking and mounting system" />
-              <h3>Racking &amp; mounting</h3>
-              <p>Durable, weather-ready mounting systems for secure rooftop and ground installs.</p>
-            </article>
-
-            <article class="product-card">
-              <img class="product-photo" src="wires.jpg" alt="Electrical wires" />
-              <h3>Wires</h3>
-              <p>Reliable electrical connections designed for safety, efficiency, and longevity.</p>
-            </article>
-
-            <article class="product-card">
-              <img class="product-photo" src="consultation.jpg" alt="Solar consultation" />
+              <img class="product-photo" src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=900&q=82" alt="Rows of solar panels in a renewable energy installation" loading="lazy" />
               <h3>Consultation</h3>
-              <p>Expert guidance to evaluate your site, energy use, and best-fit solar strategy.</p>
+              <p>Talk through your energy use, goals, property, and questions with a solar specialist.</p>
             </article>
 
             <article class="product-card">
-              <img class="product-photo" src="systemdesign.jpg" alt="System design" />
+              <img class="product-photo" src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=900&q=82" alt="Solar panels installed across a roof" loading="lazy" />
               <h3>System design</h3>
-              <p>Custom layouts engineered for maximum performance and compliance.</p>
+              <p>Plan a solar setup that reflects your site, energy needs, and available storage options.</p>
             </article>
 
             <article class="product-card">
-              <img class="product-photo" src="permitting.jpg" alt="Permitting paperwork" />
-              <h3>Permitting</h3>
-              <p>Complete paperwork and approvals to streamline project planning and delivery.</p>
+              <img class="product-photo" src="https://images.unsplash.com/photo-1497440001374-f26997328c1b?auto=format&fit=crop&w=900&q=82" alt="Residential solar panel installation" loading="lazy" />
+              <h3>Professional installation</h3>
+              <p>Coordinate the equipment, installation, and project details with an experienced team.</p>
             </article>
 
             <article class="product-card">
-              <img class="product-photo" src="installation.jpg" alt="Solar installation" />
-              <h3>Installation</h3>
-              <p>Professional installation by certified crews focused on performance and safety.</p>
+              <img class="product-photo" src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&w=900&q=82" alt="Modern home energy storage equipment" loading="lazy" />
+              <h3>Battery storage</h3>
+              <p>Consider storing solar energy for evening use or backup when your system supports it.</p>
             </article>
 
             <article class="product-card">
-              <img class="product-photo" src="maintenance.png" alt="Solar maintenance" />
-              <h3>Maintenance</h3>
-              <p>Preventive care to keep your system running at its best year-round.</p>
-            </article>
-
-            <article class="product-card">
-              <img class="product-photo" src="repair.jpg" alt="Solar repair service" />
-              <h3>Repair</h3>
-              <p>Fast troubleshooting and repair solutions for damaged or underperforming equipment.</p>
-            </article>
-
-            <article class="product-card">
-              <img class="product-photo" src="monitoring.jpg" alt="Solar monitoring" />
-              <h3>Monitoring</h3>
-              <p>Real-time performance checks and alerts to protect your solar investment.</p>
+              <img class="product-photo" src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=900&q=82" alt="Solar panels ready for ongoing system care" loading="lazy" />
+              <h3>Maintenance &amp; repair</h3>
+              <p>Get help checking system performance and addressing service or repair needs.</p>
             </article>
           </div>
         </div>
@@ -752,19 +943,72 @@
 
           <div class="feature-grid">
             <article class="feature-item">
-              <h3>High-performance systems</h3>
-              <p>We design energy systems that produce more power with fewer compromises.</p>
+              <h3>Cost savings</h3>
+              <p>Solar can lower the amount of electricity you purchase from the grid. Your results depend on your usage, system, and local utility rates.</p>
             </article>
 
             <article class="feature-item">
-              <h3>Trusted craftsmanship</h3>
-              <p>From engineering to installation, our team focuses on quality and long-term reliability.</p>
+              <h3>Sustainability</h3>
+              <p>Generate electricity from sunlight and support a cleaner energy mix for your home or business.</p>
             </article>
 
             <article class="feature-item">
-              <h3>Lower energy bills</h3>
-              <p>Reduce utility dependence and improve your return on investment with smart solar solutions.</p>
+              <h3>Energy independence</h3>
+              <p>Pair solar with battery storage for more control over when you use the energy your system produces.</p>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section stories" id="stories">
+        <div class="container">
+          <div class="section-header">
+            <h2>Customer stories</h2>
+            <p>Clear guidance and dependable service make every solar project easier to navigate.</p>
+          </div>
+          <div class="story-grid">
+            <article class="story-card">
+              <span class="story-label">Sample customer story</span>
+              <blockquote>“The consultation helped us understand how system size, storage, and our energy use fit together.”</blockquote>
+              <p>Residential solar customer</p>
+            </article>
+            <article class="story-card">
+              <span class="story-label">Sample customer story</span>
+              <blockquote>“Having a clear plan from the first site review through installation made the whole process easier to follow.”</blockquote>
+              <p>Homeowner</p>
+            </article>
+            <article class="story-card">
+              <span class="story-label">Sample customer story</span>
+              <blockquote>“We appreciated having practical answers about maintaining our system and what to do if we needed service.”</blockquote>
+              <p>Solar customer</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="faqs">
+        <div class="container">
+          <div class="section-header">
+            <h2>Frequently asked questions</h2>
+            <p>Start with the essentials, then talk with our team about your property.</p>
+          </div>
+          <div class="faq-list">
+            <details>
+              <summary>How do I get started with solar?</summary>
+              <p>Request a free quote. We can discuss your property, current energy use, goals, and the next steps for a site assessment.</p>
+            </details>
+            <details>
+              <summary>Can solar be paired with battery storage?</summary>
+              <p>Yes. A battery may store some of the energy your panels produce for later use. The right setup depends on your energy needs and property.</p>
+            </details>
+            <details>
+              <summary>Will solar eliminate my electricity bill?</summary>
+              <p>Not necessarily. Savings depend on system size, energy use, weather, utility rates, and local program rules. A site-specific quote can help set expectations.</p>
+            </details>
+            <details>
+              <summary>Do you offer maintenance and repairs?</summary>
+              <p>Yes. Contact us to discuss system checks, maintenance, monitoring, or repair support for your solar equipment.</p>
+            </details>
           </div>
         </div>
       </section>
@@ -773,10 +1017,10 @@
         <div class="container">
           <div class="cta-band">
             <div>
-              <h3>Ready to make the switch to solar?</h3>
-              <p>Book a no-cost consultation and find the right system for your home or business.</p>
+              <h3>Ready to explore solar?</h3>
+              <p>Request a free quote and talk through the right next step for your property.</p>
             </div>
-            <a href="#" class="primary-btn">Schedule Today</a>
+            <a href="mailto:info@sunsonsolar.com?subject=Free%20solar%20quote" class="primary-btn">Request a Free Quote</a>
           </div>
 
           <div class="contact-wrap" style="margin-top: 36px;">
@@ -801,9 +1045,36 @@
     </main>
 
     <footer>
-      <div class="container footer-wrap">
-        <span>© <span id="year"></span> Sun Son Solar</span>
-        <span>Clean energy solutions for a brighter tomorrow</span>
+      <div class="container">
+        <div class="footer-main">
+          <div class="footer-brand">
+            <strong>Sun Son Solar</strong>
+            <p>Solar guidance, installation, storage, and ongoing care for homes and businesses.</p>
+          </div>
+          <div class="footer-column">
+            <h2>Contact</h2>
+            <div class="footer-links">
+              <a href="tel:+1234567890">(123) 456-7890</a>
+              <a href="mailto:info@sunsonsolar.com">info@sunsonsolar.com</a>
+              <a href="login.html">Customer login</a>
+            </div>
+          </div>
+          <div class="footer-column">
+            <h2>Explore</h2>
+            <div class="footer-links">
+              <a href="#solutions">Services</a>
+              <a href="#about">Why solar</a>
+              <a href="#stories">Customer stories</a>
+              <a href="#faqs">FAQs</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-legal">
+          <span>© <span id="year"></span> Sun Son Solar. All rights reserved.</span>
+          <span>Privacy: Contact details are used to respond to your inquiry; this static page does not store quote requests.</span>
+          <span>Terms: Quotes are preliminary and depend on a property assessment and written confirmation.</span>
+          <span>Social: <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook</a> · <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a> · <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a></span>
+        </div>
       </div>
     </footer>
 
@@ -812,7 +1083,6 @@
       const authSessionKey = "sunSonSolarLoggedIn";
       const loginLink = document.getElementById("navLogin");
       const signupLink = document.getElementById("navSignup");
-      const createLink = document.getElementById("navCreate");
       const logoutButton = document.getElementById("navLogout");
       const searchForm = document.getElementById("productSearch");
       const searchInput = document.getElementById("searchInput");
@@ -823,7 +1093,6 @@
         const isLoggedIn = sessionStorage.getItem(authSessionKey) === "true";
         loginLink.hidden = isLoggedIn;
         signupLink.hidden = isLoggedIn;
-        createLink.hidden = isLoggedIn;
         logoutButton.hidden = !isLoggedIn;
       }
 
