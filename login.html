@@ -311,7 +311,7 @@
   <section class="form-wrap">
     <div class="eyebrow">Welcome back</div>
     <h1>Log in</h1>
-    <p class="sub">Enter your details to access your dashboard.</p>
+    <p class="sub">Demo sign-in only: any non-empty username and password opens the preview. Do not use a real password.</p>
 
     <div class="error" id="error" role="alert"></div>
 
@@ -359,6 +359,7 @@
   const form = document.getElementById('loginForm');
   const error = document.getElementById('error');
   const authSessionKey = 'sunSonSolarLoggedIn';
+  const usernameSessionKey = 'sunSonSolarUsername';
 
   const eyeOpen = '<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>';
   const eyeOff  = '<path d="M3 3l18 18"/><path d="M10.600 6.100A9.800 9.800 0 0112 5c6.400 0 10 7 10 7a17 17 0 01-3.200 4M6.600 6.700A17 17 0 002 12s3.600 7 10 7a9.700 9.700 0 004.100-.9"/><path d="M9.900 9.900a3 3 0 004.200 4.200"/>';
@@ -373,7 +374,11 @@
   function completeLogin() {
     try {
       sessionStorage.setItem(authSessionKey, 'true');
-      window.location.assign('dashboard.html');
+      sessionStorage.setItem(usernameSessionKey, form.username.value.trim());
+      const selectedService = new URLSearchParams(window.location.search).get('service');
+      const dashboardUrl = new URL('dashboard.html', window.location.href);
+      if (selectedService) dashboardUrl.searchParams.set('service', selectedService);
+      window.location.assign(dashboardUrl.href);
     } catch {
       error.textContent = 'Unable to sign in in this browser. Please check your browser settings and try again.';
       error.classList.add('show');
