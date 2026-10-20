@@ -11,7 +11,6 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -24,16 +23,52 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(100) NOT NULL,
+  `middle_name` varchar(100) DEFAULT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `birthdate` date NOT NULL,
+  `gender` varchar(20) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `phone_num` varchar(50) NOT NULL,
+  `address` text NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `department` enum('Administration', 'IT', 'Dispatch', 'Accounting', 'Hr', 'Marketing', 'Sales', 'Costumer Service') DEFAULT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `first_name`, `middle_name`, `last_name`, `birthdate`, `gender`, `email`, `phone_num`, `address`, `username`, `password`, `department`, `created_at`) VALUES
+(1, 'Katherine', 'Olap', 'Sinagaraw', '1990-07-01', 'Female', 'katherine.sinigaraw@sunsonsolar.com', '09291230983', 'Sun Son Solar HQ, Pasig City', 'KittyKat16', 'K@tSunShine16', 'Administration', CURRENT_TIMESTAMP),
+(2, 'Sol', 'S', 'Solis', '1967-01-08', 'Male', 'sol.solis@sunsonsolar.com', '09987654321', 'Solar HQ Office', 'Sol Solis', 'admin123', 'IT', CURRENT_TIMESTAMP);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `attendance_logs`
 --
 
 CREATE TABLE `attendance_logs` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `employee_name` varchar(200) NOT NULL,
   `latitude` decimal(10,8) NOT NULL,
   `longitude` decimal(11,8) NOT NULL,
-  `clock_in_at` datetime DEFAULT current_timestamp()
+  `clock_in_at` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `attendance_logs_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -43,11 +78,12 @@ CREATE TABLE `attendance_logs` (
 --
 
 CREATE TABLE `products_services` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
   `category` enum('product','service') NOT NULL,
   `type` varchar(100) NOT NULL,
-  `description` text DEFAULT NULL
+  `description` text DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -71,99 +107,31 @@ INSERT INTO `products_services` (`id`, `name`, `category`, `type`, `description`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Table structure for table `service_requests`
 --
 
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `first_name` varchar(100) NOT NULL,
-  `middle_name` varchar(100) DEFAULT NULL,
-  `last_name` varchar(100) NOT NULL,
-  `birthdate` date NOT NULL,
-  `gender` varchar(20) NOT NULL,
-  `email` varchar(150) NOT NULL,
-  `phone_num` varchar(50) NOT NULL,
-  `address` text NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `department` enum('Administration', 'IT', 'Dispatch', 'Accounting', 'Hr', 'Marketing', 'Sales', 'Costumer Service') DEFAULT NULL,
-  `created_at` datetime DEFAULT current_timestamp()
+CREATE TABLE `service_requests` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `client_name` varchar(150) NOT NULL,
+  `client_email` varchar(150) NOT NULL,
+  `service_id` int(11) NOT NULL,
+  `request_type` enum('Quote', 'Schedule') NOT NULL,
+  `status` enum('Pending', 'In Progress', 'Completed', 'Cancelled') DEFAULT 'Pending',
+  `created_at` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `service_id` (`service_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `fk_service_request` FOREIGN KEY (`service_id`) REFERENCES `products_services` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_user_request` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `users`
---
-
 -- --------------------------------------------------------
--- Insert Initial Admin Accounts for Kat and Sol
--- --------------------------------------------------------
-INSERT INTO `users` (`id`, `first_name`, `middle_name`, `last_name`, `birthdate`, `gender`, `email`, `phone_num`, `address`, `username`, `password`, `department`, `created_at`) VALUES
-(1, 'Katherine', 'Olap', 'Sinagaraw', '1990-07-01', 'Female', 'katherine.sinigaraw@sunsonsolar.com', '09291230983', 'Sun Son Solar HQ, Pasig City', 'KittyKat16', 'K@tSunShine16', 'Administration', CURRENT_TIMESTAMP),
-(2, 'Sol', 'S', 'Solis', '1967-01-08', 'Male', 'sol.solis@sunsonsolar.com', '09987654321', 'Solar HQ Office', 'Sol Solis', 'admin123', 'IT', CURRENT_TIMESTAMP);
---
--- Indexes for dumped tables
---
 
 --
--- Indexes for table `attendance_logs`
---
-ALTER TABLE `attendance_logs`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
-
---
--- Indexes for table `products_services`
---
-ALTER TABLE `products_services`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `username` (`username`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `attendance_logs`
---
-ALTER TABLE `attendance_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `products_services`
---
-ALTER TABLE `products_services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `attendance_logs`
---
-ALTER TABLE `attendance_logs`
-  ADD CONSTRAINT `attendance_logs_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
--- --------------------------------------------------------
 -- Table structure for table `notifications`
--- --------------------------------------------------------
+--
+
 CREATE TABLE `notifications` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -177,8 +145,11 @@ CREATE TABLE `notifications` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
+
+--
 -- Table structure for table `payments`
--- --------------------------------------------------------
+--
+
 CREATE TABLE `payments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `request_id` int(11) NOT NULL,
@@ -193,8 +164,11 @@ CREATE TABLE `payments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
+
+--
 -- Table structure for table `support_tickets`
--- --------------------------------------------------------
+--
+
 CREATE TABLE `support_tickets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
@@ -208,8 +182,11 @@ CREATE TABLE `support_tickets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
+
+--
 -- Table structure for table `announcements`
--- --------------------------------------------------------
+--
+
 CREATE TABLE `announcements` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `admin_id` int(11) DEFAULT NULL,
@@ -223,8 +200,11 @@ CREATE TABLE `announcements` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
+
+--
 -- Table structure for table `technician_reports`
--- --------------------------------------------------------
+--
+
 CREATE TABLE `technician_reports` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `technician_id` int(11) NOT NULL,
@@ -238,3 +218,9 @@ CREATE TABLE `technician_reports` (
   CONSTRAINT `fk_tech_report_user` FOREIGN KEY (`technician_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_tech_report_request` FOREIGN KEY (`request_id`) REFERENCES `service_requests` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
