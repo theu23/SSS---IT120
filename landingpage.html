@@ -186,6 +186,15 @@
         background: #e2e3e1;
       }
 
+      .nav-dashboard {
+        color: var(--dark);
+        background: #e7f2eb;
+      }
+
+      .nav-dashboard:hover {
+        background: #d7e9dd;
+      }
+
       .nav-logout {
         color: var(--dark);
         background: var(--primary);
@@ -429,6 +438,31 @@
         margin: 0;
         color: var(--muted);
         font-size: 0.96rem;
+      }
+
+      .service-action {
+        display: inline-flex;
+        min-height: 40px;
+        align-items: center;
+        justify-content: center;
+        margin-top: 16px;
+        border: 0;
+        border-radius: 999px;
+        padding: 0 16px;
+        background: var(--primary);
+        color: var(--dark);
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .service-action:hover {
+        background: var(--primary-dark);
+      }
+
+      .service-action:focus-visible {
+        outline: 3px solid var(--primary-dark);
+        outline-offset: 3px;
       }
 
       .features {
@@ -839,6 +873,7 @@
         <div class="nav-actions">
           <a class="nav-button nav-login" id="navLogin" href="login.html">Customer login</a>
           <a class="nav-button nav-signup" id="navSignup" href="index.html">Sign up</a>
+          <a class="nav-button nav-dashboard" id="navDashboard" href="dashboard.html" hidden>My dashboard</a>
           <button class="nav-button nav-logout" id="navLogout" type="button" hidden>Log out</button>
         </div>
       </div>
@@ -1107,7 +1142,7 @@
         </div>
         <div class="footer-legal">
           <span>© <span id="year"></span> Sun Son Solar. All rights reserved.</span>
-          <span>Privacy: Contact details are used to respond to your inquiry; this static page does not store quote requests.</span>
+          <span>Privacy: Dashboard requests and contact details are saved in this browser only; this preview does not send them to Sun Son Solar.</span>
           <span>Terms: Quotes are preliminary and depend on a property assessment and written confirmation.</span>
           <span>Social: <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook</a> · <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a> · <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a></span>
         </div>
@@ -1119,6 +1154,7 @@
       const authSessionKey = "sunSonSolarLoggedIn";
       const loginLink = document.getElementById("navLogin");
       const signupLink = document.getElementById("navSignup");
+      const dashboardLink = document.getElementById("navDashboard");
       const logoutButton = document.getElementById("navLogout");
       const searchForm = document.getElementById("productSearch");
       const searchInput = document.getElementById("searchInput");
@@ -1129,11 +1165,26 @@
         const isLoggedIn = sessionStorage.getItem(authSessionKey) === "true";
         loginLink.hidden = isLoggedIn;
         signupLink.hidden = isLoggedIn;
+        dashboardLink.hidden = !isLoggedIn;
         logoutButton.hidden = !isLoggedIn;
+        productCards.forEach((card) => {
+          const serviceName = card.querySelector("h3").textContent.trim();
+          let action = card.querySelector(".service-action");
+          if (!action) {
+            action = document.createElement("a");
+            action.className = "service-action";
+            card.append(action);
+          }
+          action.textContent = isLoggedIn ? "Choose this service" : "Log in to choose";
+          action.href = isLoggedIn
+            ? `dashboard.html?service=${encodeURIComponent(serviceName)}`
+            : `login.html?service=${encodeURIComponent(serviceName)}`;
+        });
       }
 
       logoutButton.addEventListener("click", () => {
         sessionStorage.removeItem(authSessionKey);
+        sessionStorage.removeItem("sunSonSolarUsername");
         updateAuthNavigation();
       });
 
