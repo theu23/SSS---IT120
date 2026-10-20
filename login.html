@@ -160,17 +160,6 @@
   }
   .btn:hover { transform: translateY(-1px); filter: brightness(1.06); box-shadow: 0 18px 32px -12px rgba(180,95,6,.85), inset 0 1px 0 rgba(255,255,255,.25); }
   .btn:active { transform: translateY(0); }
-  .admin-btn {
-    margin-top: 12px;
-    color: #fff;
-    background: #244a73;
-    box-shadow: 0 8px 18px -12px rgba(16, 42, 67, .65);
-  }
-  .admin-btn:hover {
-    background: #102a43;
-    filter: none;
-    box-shadow: 0 12px 22px -12px rgba(16, 42, 67, .75);
-  }
   .btn.loading { pointer-events: none; opacity: .85; }
   .btn.loading::after {
     content: ""; display: inline-block; width: 14px; height: 14px; margin-left: 10px; vertical-align: -2px;
@@ -356,7 +345,6 @@
       </div>
 
       <button class="btn" type="submit" id="submitBtn">Log in</button>
-      <button class="btn admin-btn" type="button" id="adminLoginBtn">Login as Admin</button>
     </form>
 
 
@@ -370,10 +358,7 @@
   const eye = document.getElementById('eye');
   const form = document.getElementById('loginForm');
   const error = document.getElementById('error');
-  const adminLoginButton = document.getElementById('adminLoginBtn');
   const authSessionKey = 'sunSonSolarLoggedIn';
-  const demoAdminUsername = 'admin';
-  const demoAdminPassword = 'admin123';
 
   const eyeOpen = '<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>';
   const eyeOff  = '<path d="M3 3l18 18"/><path d="M10.600 6.100A9.800 9.800 0 0112 5c6.400 0 10 7 10 7a17 17 0 01-3.200 4M6.600 6.700A17 17 0 002 12s3.600 7 10 7a9.700 9.700 0 004.100-.9"/><path d="M9.900 9.900a3 3 0 004.200 4.200"/>';
@@ -394,17 +379,6 @@
       error.classList.add('show');
     }
   }
-
-  adminLoginButton.addEventListener('click', () => {
-    const username = form.username.value.trim();
-    if (username !== demoAdminUsername || pw.value !== demoAdminPassword) {
-      error.textContent = 'Invalid admin username or password.';
-      error.classList.add('show');
-      return;
-    }
-    error.classList.remove('show');
-    completeLogin();
-  });
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
