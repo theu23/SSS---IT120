@@ -159,3 +159,80 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- --------------------------------------------------------
+-- Table structure for table `notifications`
+-- --------------------------------------------------------
+CREATE TABLE `notifications` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `title` varchar(150) NOT NULL,
+  `message` text NOT NULL,
+  `is_read` tinyint(1) DEFAULT 0,
+  `created_at` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `fk_notification_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+-- Table structure for table `payments`
+-- --------------------------------------------------------
+CREATE TABLE `payments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `request_id` int(11) NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `payment_method` varchar(50) NOT NULL,
+  `receipt_number` varchar(100) UNIQUE NOT NULL,
+  `status` enum('Pending', 'Paid', 'Failed', 'Refunded') DEFAULT 'Pending',
+  `paid_at` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `request_id` (`request_id`),
+  CONSTRAINT `fk_payment_request` FOREIGN KEY (`request_id`) REFERENCES `service_requests` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+-- Table structure for table `support_tickets`
+-- --------------------------------------------------------
+CREATE TABLE `support_tickets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) NOT NULL,
+  `subject` varchar(200) NOT NULL,
+  `message` text NOT NULL,
+  `status` enum('Open', 'In Progress', 'Resolved', 'Closed') DEFAULT 'Open',
+  `created_at` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `customer_id` (`customer_id`),
+  CONSTRAINT `fk_ticket_customer` FOREIGN KEY (`customer_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+-- Table structure for table `announcements`
+-- --------------------------------------------------------
+CREATE TABLE `announcements` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `admin_id` int(11) DEFAULT NULL,
+  `title` varchar(200) NOT NULL,
+  `content` text NOT NULL,
+  `target_department` varchar(100) DEFAULT 'All',
+  `created_at` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `admin_id` (`admin_id`),
+  CONSTRAINT `fk_announcement_admin` FOREIGN KEY (`admin_id`) REFERENCES `users` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+-- Table structure for table `technician_reports`
+-- --------------------------------------------------------
+CREATE TABLE `technician_reports` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `technician_id` int(11) NOT NULL,
+  `request_id` int(11) NOT NULL,
+  `issue_description` text NOT NULL,
+  `status` enum('Pending Review', 'Resolved') DEFAULT 'Pending Review',
+  `created_at` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `technician_id` (`technician_id`),
+  KEY `request_id` (`request_id`),
+  CONSTRAINT `fk_tech_report_user` FOREIGN KEY (`technician_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_tech_report_request` FOREIGN KEY (`request_id`) REFERENCES `service_requests` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
