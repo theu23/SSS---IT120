@@ -94,10 +94,12 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
+-- --------------------------------------------------------
+-- Insert Initial Admin Accounts for Kat and Sol
+-- --------------------------------------------------------
 INSERT INTO `users` (`id`, `first_name`, `middle_name`, `last_name`, `birthdate`, `gender`, `email`, `phone_num`, `address`, `username`, `password`, `department`, `created_at`) VALUES
-(1, 'Kitty', 'Kat', 'User', '1998-05-16', 'Female', 'kittykat16@example.com', '09123456789', '123 Main St', 'KittyKat16', 'K@tSunShine16', NULL, '2026-09-29 09:07:07'),
-(2, 'Sol', 'S', 'Solis', '1967/01/08', 'Male', 'sol.solis@sunsonsolar.com', '09987654321', 'Solar HQ Office', 'Sol Solis', 'admin123', 'IT', '2026-09-29 09:07:22'),
-(3, 'Katherine', 'O', 'Sinigaraw', '1990/01/07', 'Female', 'katherine.sinigaraw@sunsonsolar.com', '09291230983', 'Client', 'Sol Solis', 'admin123', 'IT', '2026-09-29 09:02:39');
+(1, 'Katherine', 'Olap', 'Sinagaraw', '1990-07-01', 'Female', 'katherine.sinigaraw@sunsonsolar.com', '09291230983', 'Sun Son Solar HQ, Pasig City', 'KittyKat16', 'K@tSunShine16', 'Administration', CURRENT_TIMESTAMP),
+(2, 'Sol', 'S', 'Solis', '1967-01-08', 'Male', 'sol.solis@sunsonsolar.com', '09987654321', 'Solar HQ Office', 'Sol Solis', 'admin123', 'IT', CURRENT_TIMESTAMP);
 --
 -- Indexes for dumped tables
 --
