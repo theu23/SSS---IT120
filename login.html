@@ -373,7 +373,7 @@
   function completeLogin() {
     try {
       sessionStorage.setItem(authSessionKey, 'true');
-      window.location.assign('landingpage.html');
+      window.location.assign('dashboard.html');
     } catch {
       error.textContent = 'Unable to sign in in this browser. Please check your browser settings and try again.';
       error.classList.add('show');
